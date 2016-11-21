@@ -12,11 +12,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { TodoComponent } from './todo/todo.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HeaderComponent } from './header/header.component';
+
+import { AUTH_PROVIDERS } from './services/auth.service';
+
+import { LoggedInGuard } from './loggedIn.guard';
+
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'todo', component: TodoComponent },
+  { path: 'todo', component: TodoComponent, canActivate: [LoggedInGuard]},
   { path: '', redirectTo: 'todo', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ];
@@ -27,7 +34,8 @@ const routes: Routes = [
     PageNotFoundComponent,
     TodoComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    { provide: LocationStrategy, useClass: PathLocationStrategy }
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    AUTH_PROVIDERS
+
   ],
   bootstrap: [AppComponent]
 })

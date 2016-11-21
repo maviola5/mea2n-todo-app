@@ -36,7 +36,7 @@ label {
   padding: 8px 4px;
   width: 100%;
   font-size: 16px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 2px solid rgba(0,0,0,0.2);
 }
 .button {
   padding: 8px 16px;
@@ -44,7 +44,6 @@ label {
   border-radius: 5px;
   font-size: 16px;
   text-transform: uppercase;
-  /* font-weight: 700; */
   background: transparent;
   border: 0px;
   box-shadow: 1px 1px 10px -4px rgba(0,0,0,0.5);
@@ -97,4 +96,103 @@ label {
   font-size: 20px;
   right: 16px;
   top: 16px;
+}
+/*header*/
+.header {
+  display: flex;
+  flex-flow: row wrap;
+}
+.brand {
+  display: flex;
+  flex: 0 0 50%;
+}
+.nav {
+  display: none;  
+  flex: 0 0 50%;
+}
+.nav.is-active {
+  display: flex;
+}
+.nav__ul {
+  list-style: none;
+  display: flex;
+  flex-flow: column;
+  flex: 0 0 100%;
+}
+.nav__li {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.nav__a {
+  text-decoration: none;
+  padding: 16px;
+  color: #000;
+}
+.nav.is-active {
+    flex: 0 0 100%;
+}
+.nav__a.is-active {
+  text-decoration: underline;
+}
+.nav__a.is-active:hover {
+  text-decoration: underline;
+} 
+.nav__a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+.brand {
+  margin: 0;
+  padding: 16px 16px 16px 27px;
+  font-size: 20px;
+  line-height: 1;
+  position: relative;
+  color: #4CAF50;
+}
+.brand:before {
+  content: '\f046';
+  font-family: 'FontAwesome';
+  position: absolute;
+  left: 0;
+  line-height: 20px;
+  font-size: 24px;
+}
+.header {
+  padding: 0 16px;
+}
+.nav_toggle {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  padding: 16px 0;
+  flex: 0 0 50%;
+  justify-content: flex-end;
+}
+.nav_toggle__button {
+  -webkit-appearance: none;
+  border: 0;
+  background: none;
+  font-size: 24px;
+  padding: 0;
+  line-height: 1;
+}    
+.nav_toggle__button:hover {
+  cursor: pointer;
+}
+@media screen and (min-width: 40em){
+	.nav {
+		display: flex;
+		flex: 0 0 50%;
+	}
+	.nav_toggle {
+		display: none;
+	}
+	.nav__ul {
+		flex-flow: row wrap;
+		margin: 0;
+		padding: 0;
+		flex: 1;
+		justify-content: flex-end;
+	}
 }
