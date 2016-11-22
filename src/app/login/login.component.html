@@ -1,16 +1,31 @@
 <div class="container">
 	<h1>Login</h1>
 	<div class="card">
-		<div class="field">
-			<label for="email">Email: </label>
-			<input type="email" placeholder="Email" name="email" class="input-email">
-		</div>
-		<div class="field">
-			<label for="password">Password: </label>
-			<input type="password" name="password" class="input-password" placeholder="Password">
-		</div>
-		<div class="field">
-			<button class="button">Submit</button>
-		</div>
+		<form [formGroup]="form"
+		(ngSubmit)="login(form.controls['username'].value, form.controls['password'].value)">
+			<div class="field">
+				<label for="username">Email: </label>
+				<input 	type="text" 
+						placeholder="Email" 
+						name="email" 
+						class="input-email" 
+						[formControl]="form.controls['username']">
+			</div>
+			<div class="field">
+				<label for="password">Password: </label>
+				<input 	type="password" 
+						name="password" 
+						class="input-password" 
+						placeholder="Password"
+						[formControl]="form.controls['password']">
+			</div>
+			<div class="field">
+				<button class="button">Submit</button>
+			</div>
+		</form>
+	</div>
+	<p>Not registered? Register <a [routerLink]="['/register']">here.</a></p>
+	<div class="message error" *ngIf="message.active" (click)="message.active = !message.active">
+		<p>{{ message.text }}</p>
 	</div>
 </div>

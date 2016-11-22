@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -17,6 +17,7 @@ import { HeaderComponent } from './header/header.component';
 import { AUTH_PROVIDERS } from './services/auth.service';
 
 import { LoggedInGuard } from './loggedIn.guard';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -35,17 +36,20 @@ const routes: Routes = [
     TodoComponent,
     LoginComponent,
     RegisterComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    AUTH_PROVIDERS
+    AUTH_PROVIDERS,
+    LoggedInGuard
 
   ],
   bootstrap: [AppComponent]
