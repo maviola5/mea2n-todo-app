@@ -18,6 +18,7 @@ import { AUTH_PROVIDERS } from './services/auth.service';
 
 import { LoggedInGuard } from './loggedIn.guard';
 import { FooterComponent } from './footer/footer.component';
+import { MessageComponent } from './message/message.component';
 
 
 
@@ -37,7 +38,8 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

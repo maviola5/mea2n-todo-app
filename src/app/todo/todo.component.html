@@ -1,39 +1,49 @@
 <div class="container">
-  <h1>Todo</h1>
-<div class="card">
-  <div class="field">
-    <div class="task">
-      <i class="fa fa-square-o incomplete" aria-hidden="true"></i>
-      <input type="text" name="task" class="input-text">
-      <!-- <i class="fa fa-times-circle-o" aria-hidden="true"></i> -->
-    </div>
-  </div>
-  <div class="field">
-    <div class="task">
-      <i class="fa fa-check-square-o complete" aria-hidden="true"></i>
-      <input type="text" name="task" class="input-text">
-      <i class="fa fa-times-circle-o delete" aria-hidden="true"></i>
-    </div>
-  </div>
-  <div class="field">
-    <div class="task">
-      <i class="fa fa-square-o incomplete" aria-hidden="true"></i>
-      <input type="text" name="task" class="input-text">
-      <!-- <i class="fa fa-times-circle-o" aria-hidden="true"></i> -->
-    </div>
-  </div>
-  <div class="field">
-    <button class="button">Update</button>
-  </div>
-  <div class="field">
-      <label for="newtask">New Task: </label>      
-      <input type="text" name="newtask" class="input-text">
-  </div>
-  <div class="field">
-    <button class="button">Add</button>
-  </div>
-</div>
-<div class="message error">
-  <p>Something went wrong!</p>
-</div>
+	<h1>Todo</h1>
+	<div class="card">
+		<form
+		[formGroup]="todoListForm"
+		(ngSubmit)="updateForm()">
+			<div class="field">
+				<div class="task">
+					<i class="fa fa-square-o incomplete" aria-hidden="true"></i>
+					<input type="text" name="task" class="input-text">
+					<!-- <i class="fa fa-times-circle-o" aria-hidden="true"></i> -->
+				</div>
+			</div>
+			<div class="field">
+				<div class="task">
+					<i class="fa fa-check-square-o complete" aria-hidden="true"></i>
+					<input type="text" name="task" class="input-text">
+					<i class="fa fa-times-circle-o delete" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="field">
+				<div class="task">
+					<i class="fa fa-square-o incomplete" aria-hidden="true"></i>
+					<input type="text" name="task" class="input-text">
+					<!-- <i class="fa fa-times-circle-o" aria-hidden="true"></i> -->
+				</div>
+			</div>
+			<div class="field">
+				<button class="button" type="submit">Update</button>
+			</div>
+		</form>
+		<form 
+		[formGroup]="newTaskForm"
+		(ngSubmit)="createTask(newTaskForm.controls['newTask'].value)">
+			<div class="field">
+				<label for="newTask">New Task: </label>      
+				<input 
+					type="text" 
+					name="newTask" 
+					class="input-text"
+					[formControl]="newTaskForm.controls['newTask']">
+			</div>
+			<div class="field">
+				<button class="button" type="submit">Add</button>
+			</div>
+		</form>
+	</div>
+	<message [message]="message" *ngIf="message.active"></message>
 </div>

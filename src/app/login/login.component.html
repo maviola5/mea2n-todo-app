@@ -1,15 +1,20 @@
 <div class="container">
 	<h1>Login</h1>
 	<div class="card">
-		<form [formGroup]="form"
-		(ngSubmit)="login(form.controls['username'].value, form.controls['password'].value)">
+		<form 
+		[formGroup]="form"
+		(ngSubmit)="login({
+			username: form.controls['username'].value, 
+			password: form.controls['password'].value
+		})">
 			<div class="field">
 				<label for="username">Email: </label>
-				<input 	type="text" 
+				<input 	type="email" 
 						placeholder="Email" 
 						name="email" 
 						class="input-email" 
-						[formControl]="form.controls['username']">
+						[formControl]="form.controls['username']"
+						[class.error]="!form.controls['username'].valid && form.controls['username'].touched">
 			</div>
 			<div class="field">
 				<label for="password">Password: </label>
@@ -17,15 +22,14 @@
 						name="password" 
 						class="input-password" 
 						placeholder="Password"
-						[formControl]="form.controls['password']">
+						[formControl]="form.controls['password']" 
+						[class.error]="!form.controls['password'].valid && form.controls['password'].touched">
 			</div>
 			<div class="field">
-				<button class="button">Submit</button>
+				<button class="button" type="submit">Submit</button>
 			</div>
 		</form>
 	</div>
 	<p>Not registered? Register <a [routerLink]="['/register']">here.</a></p>
-	<div class="message error" *ngIf="message.active" (click)="message.active = !message.active">
-		<p>{{ message.text }}</p>
-	</div>
+	<message [message]="message" *ngIf="message.active"></message>
 </div>

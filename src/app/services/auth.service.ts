@@ -22,7 +22,7 @@ export class AuthService {
 	){}
 
 	login(user: string, password: string): Observable<boolean> {
-		if(user === 'user' && password === 'password'){
+		if(user === 'user@user' && password === 'password'){
 			localStorage.setItem('username', user);
 			return Observable.of(true);
 		}

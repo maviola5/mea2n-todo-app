@@ -7,16 +7,7 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
-
-export class Message {
-	text: string;
-	active: boolean;
-
-	constructor(obj?: any) {
-		this.text 		= obj && obj.text 		|| null;
-		this.active		= obj && obj.active		|| null;
-	}
-}
+import { Message } from '../shared';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +15,7 @@ export class Message {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-	form: FormGroup
+	form: FormGroup;
 	message: Message;
 
 	constructor(
@@ -35,20 +26,36 @@ export class LoginComponent implements OnInit {
 		this.form = formBuilder.group({
 			'username' : ['', Validators.required],
 			'password' : ['', Validators.required]
-		})
-		this.message = new Message({
-			text : '',
-			active : false
 		});
+		this.message = new Message();
 	}
 
-	login(username: string, password: string): void {
+	login(params: { username?: string, password?: string }): any {
 		
-		this.message.text = '';
-		this.message.active = false;
+		if(!params.username && !params.password){
+			return this.message = new Message({
+				text: 'Username and Password are required.',
+				active: true
+			})
+		}
+
+		if(!params.username){
+			return this.message = new Message({
+				text : 'Username is required.',
+				active : true
+			})
+		}
+		if(!params.password){
+			return this.message = new Message({
+				text: 'Password is required.',
+				active: true
+			})
+		}
+
+		this.message = new Message();
 		
 		this.authService
-		.login(username, password)
+		.login(params.username, params.password)
 		.subscribe(
 			(): any => {
 				if( this.authService.isLoggedIn() ){
@@ -57,9 +64,10 @@ export class LoginComponent implements OnInit {
 					return this.router.navigate([redirect]);
 				}
 
-				this.message.text = "username or password incorrect";
-				this.message.active = true;
-
+				this.message = new Message({
+					text : 'Username and password combination incorrect.',
+					active : true
+				});
 			},
 			(err) => {
 				//catch error for when running auth against server
@@ -70,12 +78,8 @@ export class LoginComponent implements OnInit {
 
 	logout(): void {
 		this.authService.logout();
-		// return false;
 	}
 
-
-
-	ngOnInit() {
-	}
+	ngOnInit() {}
 
 }
