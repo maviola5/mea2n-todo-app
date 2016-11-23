@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 *{
-  box-sizing: border-box;
- font-family: 'Open Sans', sans-serif;
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
 }
 html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
 }
 html {
-  font-size: 16px;
+	font-size: 16px;
 }
 h1, h2, h3, h4, h5, h6 {
-  margin: 24px 0;
-  line-height: 1;
+	margin: 24px 0;
+	line-height: 1;
 }
 h1{font-size: 36px}
 h2{font-size: 32px}
@@ -23,184 +23,205 @@ h4{font-size: 24px}
 h5{font-size: 20px}
 h6{font-size: 16px}
 p {
-  line-height: 1.5;
-  margin: 24px 0px;
+	line-height: 1.5;
+	margin: 24px 0px;
 }
 .container {
-  margin: auto;
-  position: relative;
-  max-width: 25em;
-  padding: 16px;
+	margin: auto;
+	position: relative;
+	max-width: 25em;
+	padding: 16px;
 }
 .card {
-  padding: 24px;
-  box-shadow: 1px 1px 10px -3px rgba(0,0,0,0.5);
+	padding: 24px;
+	box-shadow: 1px 1px 10px -3px rgba(0,0,0,0.5);
 }
 label {
-  display: block;
+	display: block;
 }
 [class*="input-"] {
-  display: block;
-  margin-bottom: 16px;
-  padding: 8px 4px;
-  width: 100%;
-  font-size: 16px;
-  border: 2px solid rgba(0,0,0,0.2);
+	display: block;
+	margin-bottom: 16px;
+	padding: 8px 4px;
+	width: 100%;
+	font-size: 16px;
+	border: 2px solid rgba(0,0,0,0.2);
 }
 [class*="input-"].error {
-  border: 2px solid rgba(244, 67, 54, 0.4);
+	border: 2px solid rgba(244, 67, 54, 0.4);
+}
+.task__name {
+	display: block;
+	margin-bottom: 16px;
+	padding: 8px 4px;
+	width: 100%;
+	font-size: 16px;
+	border: 2px solid rgba(130,130,130,0.1);
+	min-height: 42px;
+	background: rgba(130,130,130,0.1);
+	overflow-x: scroll;
+	white-space: nowrap;
 }
 .button {
-  padding: 8px 16px;
-  -webkit-appearance: none;
-  border-radius: 5px;
-  font-size: 16px;
-  text-transform: uppercase;
-  background: transparent;
-  border: 0px;
-  box-shadow: 1px 1px 10px -4px rgba(0,0,0,0.5);
-  border: 1px solid rgba(0,0,0,0.2);
-  margin: 0 0 24px 0;
+	padding: 8px 16px;
+	-webkit-appearance: none;
+	border-radius: 5px;
+	font-size: 16px;
+	text-transform: uppercase;
+	background: transparent;
+	border: 0px;
+	box-shadow: 1px 1px 10px -4px rgba(0,0,0,0.5);
+	border: 1px solid rgba(0,0,0,0.2);
+	margin: 0 0 24px 0;
 }
 .button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 .task {
-  padding: 0 24px 0 24px;
-  position: relative
+	padding: 0 24px 0 24px;
+	position: relative;
+	display: block;
+}
+.done {
+	text-decoration: line-through;
 }
 .incomplete {
-  color: rgba(0,0,0,0.5);
-  position: absolute;
-  left: 0;
-  line-height: 38px;
-  font-size: 20px;
+	color: rgba(0,0,0,0.5);
+	position: absolute;
+	left: 0;
+	line-height: 38px;
+	font-size: 20px;
 }
 .complete {
-  color: rgba(76, 175, 80,1.0);
-  position: absolute;
-  left: 0;
-  line-height: 38px;
-  font-size: 20px;
+	color: rgba(76, 175, 80,1.0);
+	position: absolute;
+	left: 0;
+	line-height: 38px;
+	font-size: 20px;
 }
 .delete {
-  color: rgba(244, 67, 54,1.0);
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 20px;
-  line-height: 38px;
+	color: rgba(244, 67, 54,1.0);
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 20px;
+	line-height: 38px;
+}
+.incomplete:hover,
+.complete:hover,
+.delete:hover {
+	cursor: pointer;
 }
 .message {
-  position: relative;
-  padding: 24px;
-  box-shadow: 1px 1px 10px -4px rgba(244, 67, 54,1.0);
-  margin: 24px 0;
-  font-weight: 700;
+	position: relative;
+	padding: 24px;
+	box-shadow: 1px 1px 10px -4px rgba(244, 67, 54,1.0);
+	margin: 24px 0;
+	font-weight: 700;
 }
 .message:after {
-  position: absolute;
-  font-family: "FontAwesome";
-  content: "\f00d";
-  font-size: 20px;
-  right: 16px;
-  top: 16px;
+	position: absolute;
+	font-family: "FontAwesome";
+	content: "\f00d";
+	font-size: 20px;
+	right: 16px;
+	top: 16px;
 }
 .message.error {
-  background: rgba(244, 67, 54,0.1);
-  color: rgba(244, 67, 54, 1.0);
+	background: rgba(244, 67, 54,0.1);
+	color: rgba(244, 67, 54, 1.0);
 }
 .message.success {
-  background: rgba(76, 175, 80, 0.1);
-  color: rgba(76, 175, 80, 1.0);
+	background: rgba(76, 175, 80, 0.1);
+	color: rgba(76, 175, 80, 1.0);
 }
 .message.alert {
-  background: rgba(255, 193, 7, 0.1);
-  color: rgba(255, 193, 7, 1.0);
+	background: rgba(255, 193, 7, 0.1);
+	color: rgba(255, 193, 7, 1.0);
 }
 
 /*header*/
 .header {
-  display: flex;
-  flex-flow: row wrap;
+	display: flex;
+	flex-flow: row wrap;
 }
 .brand {
-  display: flex;
-  flex: 0 0 50%;
+	display: flex;
+	flex: 0 0 50%;
 }
 .nav {
-  display: none;  
-  flex: 0 0 50%;
+	display: none;  
+	flex: 0 0 50%;
 }
 .nav.is-active {
-  display: flex;
+	display: flex;
 }
 .nav__ul {
-  list-style: none;
-  display: flex;
-  flex-flow: column;
-  flex: 0 0 100%;
+	list-style: none;
+	display: flex;
+	flex-flow: column;
+	flex: 0 0 100%;
 }
 .nav__li {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
 }
 .nav__a {
-  text-decoration: none;
-  padding: 16px;
-  color: #000;
+	text-decoration: none;
+	padding: 16px;
+	color: #000;
 }
 .nav.is-active {
-    flex: 0 0 100%;
+	flex: 0 0 100%;
 }
 .nav__a.is-active {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 .nav__a.is-active:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 } 
 .nav__a:hover {
-  text-decoration: none;
-  cursor: pointer;
+	text-decoration: none;
+	cursor: pointer;
 }
 .brand {
-  margin: 0;
-  padding: 16px 16px 16px 27px;
-  font-size: 20px;
-  line-height: 1;
-  position: relative;
-  color: #4CAF50;
+	margin: 0;
+	padding: 16px 16px 16px 27px;
+	font-size: 20px;
+	line-height: 1;
+	position: relative;
+	color: #4CAF50;
 }
 .brand:before {
-  content: '\f046';
-  font-family: 'FontAwesome';
-  position: absolute;
-  left: 0;
-  line-height: 20px;
-  font-size: 24px;
+	content: '\f046';
+	font-family: 'FontAwesome';
+	position: absolute;
+	left: 0;
+	line-height: 20px;
+	font-size: 24px;
 }
 .header {
-  padding: 0 16px;
+	padding: 0 16px;
 }
 .nav_toggle {
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  padding: 16px 0;
-  flex: 0 0 50%;
-  justify-content: flex-end;
+	display: flex;
+	align-items: center;
+	font-size: 24px;
+	padding: 16px 0;
+	flex: 0 0 50%;
+	justify-content: flex-end;
 }
 .nav_toggle__button {
-  -webkit-appearance: none;
-  border: 0;
-  background: none;
-  font-size: 24px;
-  padding: 0;
-  line-height: 1;
+	-webkit-appearance: none;
+	border: 0;
+	background: none;
+	font-size: 24px;
+	padding: 0;
+	line-height: 1;
 }    
 .nav_toggle__button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 @media screen and (min-width: 40em){
 	.nav {
@@ -218,27 +239,23 @@ label {
 		justify-content: flex-end;
 	}
 }
-app-header,
-app-footer {
-  display: block;
-}
 .footer {
-  padding: 0 16px;
+	padding: 0 16px;
 }
 app-root {
-    display: flex;
-    flex: 0 0 100%;
-    min-height: 100vh;
-    flex-flow: column;
+	display: flex;
+	flex: 0 0 100%;
+	min-height: 100vh;
+	flex-flow: column;
 }
 
 main {
-    flex: 1 0 auto;
+	flex: 1 0 auto;
 }
 
 footer.footer {
-    flex: 0 1 auto;
+	flex: 0 1 auto;
 }
 message {
-  display: block;
+	display: block;
 }

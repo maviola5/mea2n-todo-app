@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
 	message: Message;
 	form: FormGroup;
 
+
 	constructor(
 		private authService: AuthService,
 		private formBuilder: FormBuilder
@@ -71,10 +72,7 @@ export class RegisterComponent implements OnInit {
 			});
 		}
 
-		return this.message = new Message({
-			text: 'Good job, Great show',
-			active: true
-		});
+		this.authService.register(params).subscribe( (results: any) => console.log(results));
 	}
 
 	ngOnInit() {

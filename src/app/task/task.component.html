@@ -1,0 +1,15 @@
+<i 
+class="fa"
+[class.fa-check-square-o]="task.completed"
+[class.complete]="task.completed"
+[class.incomplete]="!task.completed"
+[class.fa-square-o]="!task.completed"
+aria-hidden="true" 
+(click)="markTask(task)"></i>
+
+<div class="task__name" [class.done]="task.completed">{{ task.name }}</div>
+
+<i 
+class="fa fa-times-circle-o delete" 
+aria-hidden="true" 
+*ngIf="task.completed" (click)="deleteTask(task)"></i>

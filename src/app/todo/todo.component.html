@@ -1,34 +1,9 @@
 <div class="container">
 	<h1>Todo</h1>
 	<div class="card">
-		<form
-		[formGroup]="todoListForm"
-		(ngSubmit)="updateForm()">
-			<div class="field">
-				<div class="task">
-					<i class="fa fa-square-o incomplete" aria-hidden="true"></i>
-					<input type="text" name="task" class="input-text">
-					<!-- <i class="fa fa-times-circle-o" aria-hidden="true"></i> -->
-				</div>
-			</div>
-			<div class="field">
-				<div class="task">
-					<i class="fa fa-check-square-o complete" aria-hidden="true"></i>
-					<input type="text" name="task" class="input-text">
-					<i class="fa fa-times-circle-o delete" aria-hidden="true"></i>
-				</div>
-			</div>
-			<div class="field">
-				<div class="task">
-					<i class="fa fa-square-o incomplete" aria-hidden="true"></i>
-					<input type="text" name="task" class="input-text">
-					<!-- <i class="fa fa-times-circle-o" aria-hidden="true"></i> -->
-				</div>
-			</div>
-			<div class="field">
-				<button class="button" type="submit">Update</button>
-			</div>
-		</form>
+
+		<task [task]="task" *ngFor="let task of tasks"></task>
+
 		<form 
 		[formGroup]="newTaskForm"
 		(ngSubmit)="createTask(newTaskForm.controls['newTask'].value)">
