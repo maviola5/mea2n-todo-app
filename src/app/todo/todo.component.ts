@@ -37,8 +37,8 @@ export class TodoComponent implements OnInit {
 
 		this.todoListForm = formBuilder.group({});
 
-		this.tasks.map(item => {
-
+		this.tasks.forEach(item => {
+			this.todoListForm.id = 
 		});
 
 		this.newTaskForm = formBuilder.group({
