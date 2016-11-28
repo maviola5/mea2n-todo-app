@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Message } from '../shared';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Task } from '../shared';
+
+import { TodoService } from '../services/todo.service';
+import { AuthService } from '../services/auth.service';
+
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-todo',
@@ -20,30 +26,10 @@ export class TodoComponent implements OnInit {
 	tasks: Task[];
 
 	constructor(
-		private formBuilder: FormBuilder
+		private formBuilder: FormBuilder,
+		private todoService: TodoService,
+		private authService: AuthService
 	) {
-		this.tasks = [
-			{
-				id : '123',
-				name : 'mow the lawn',
-				completed : false
-
-			}, {
-				id : '234',
-				name : 'take out the trash',
-				completed : true
-			}, {
-				id : '674',
-				name : 'do the laundry',
-				completed : false
-			}
-		].map( item => {
-			return new Task({
-				id : item.id,
-				name : item.name,
-				completed : item.completed
-			})
-		});
 
 		this.newTaskForm = formBuilder.group({
 			'newTask' : ['']
@@ -60,16 +46,100 @@ export class TodoComponent implements OnInit {
 				active: true
 			});
 		}
-		console.log(task);
 
-		let newTask = new Task({
-			id: 'adfasdf',
-			name: task
-		});
+		let _id = this.authService.getId();
+		let name = task;
 
-		this.tasks.push(newTask);
+		this.todoService
+		.createTask(_id, name)
+		.subscribe(
+			(res: any) => {
+				this.tasks = res.tasks.map( item => {
+					return new Task({
+						id: item._id,
+						name: item.name,
+						completed: item.completed
+					});
+				});
+			},
+			(err) => {
+				this.message = new Message({
+					text : JSON.parse(err._body).message,
+					active : true
+				});
+			},
+			() => {
+				console.log('done with create task');
+			}
+		);
 
 		this.newTaskForm.reset();
+	}
+
+	updateTask(task: Task): any {
+		
+		this.message = new Message();
+
+		let _id = this.authService.getId();
+		let taskid = task.id;
+		let completed = task.completed;
+
+		this.todoService
+		.updateTask(_id, taskid, completed)
+		.subscribe(
+			(res: any) => {
+				this.tasks = res.tasks.map( item => {
+					return new Task({
+						id: item._id,
+						name: item.name,
+						completed: item.completed
+					});
+				})
+			},
+			(err: any) => {
+				console.log(err);
+				this.message = new Message({
+					text: JSON.parse(err._body).message,
+					active: true
+				});
+			},
+			() => {
+				console.log('done with update task');
+			}
+		);
+
+
+	}
+	
+	deleteTask(task: Task): any {
+		let _id = this.authService.getId();
+		let taskid = task.id;
+
+		this.message = new Message();
+
+		this.todoService
+		.deleteTask(_id, taskid)
+		.subscribe(
+			(res: any) => {
+				this.tasks = res.tasks.map( item => {
+					return new Task({
+						id : item._id,
+						name : item.name,
+						completed : item.completed
+					});
+				})
+			},
+			(err: any) => {
+
+				return this.message = new Message({
+					text : JSON.parse(err._body).message,
+					active : true
+				});
+			},
+			() => {
+				console.log('delete completed');
+			}
+		);
 	}
 
 	updateForm(): any {
@@ -77,6 +147,31 @@ export class TodoComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		let _id = this.authService.getId();
+		this.todoService
+		.getTodo(_id)
+		.subscribe(
+			(res: any) => {
+				// console.log(res);
+				this.tasks = res.tasks.map( item => {
+					return new Task({
+						id: item._id,
+						name: item.name,
+						completed: item.completed
+					});
+				});
+			},
+			(err: any) => {
+				// console.log(err);
+				return this.message = new Message({
+					text : JSON.parse(err._body).message,
+					active : true
+				});
+			},
+			() => {
+				console.log('done with init');
+			}
+		);
 	}
 
 }

@@ -15,6 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 
 import { AUTH_PROVIDERS } from './services/auth.service';
+import { TODO_PROVIDERS } from './services/todo.service';
 
 import { LoggedInGuard } from './loggedIn.guard';
 import { FooterComponent } from './footer/footer.component';
@@ -53,6 +54,7 @@ const routes: Routes = [
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     AUTH_PROVIDERS,
+    TODO_PROVIDERS,
     LoggedInGuard
 
   ],

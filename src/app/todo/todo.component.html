@@ -2,7 +2,7 @@
 	<h1>Todo</h1>
 	<div class="card">
 
-		<task [task]="task" *ngFor="let task of tasks"></task>
+		<task [task]="task" *ngFor="let task of tasks" (updateTaskEvent)="updateTask($event)" (deleteTaskEvent)="deleteTask($event)"></task>
 
 		<form 
 		[formGroup]="newTaskForm"

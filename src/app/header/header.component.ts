@@ -12,19 +12,21 @@ import { Router } from '@angular/router';
 	}
 })
 export class HeaderComponent implements OnInit {
-
 	toggleNav: boolean = false;
 
 	constructor(
 		private authService: AuthService,
 		private router: Router
-	) { }
+	) {}
 
-	ngOnInit() {
-	}
+	ngOnInit() {}
 
 	showLogin(): boolean{
 		return this.authService.isLoggedIn();
+	}
+
+	user(): any {
+		return this.authService.getUser();
 	}
 
 	logout() {

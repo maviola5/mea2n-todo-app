@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Task } from '../shared';
 
 @Component({
@@ -10,24 +10,32 @@ import { Task } from '../shared';
 	}
 })
 export class TaskComponent implements OnInit {
-	@Input() task: Task
+	@Input() task: Task;
 
-	constructor() {}
+	@Output() updateTaskEvent: EventEmitter<Task>;
+	@Output() deleteTaskEvent: EventEmitter<Task>;
+
+	constructor() {
+		this.deleteTaskEvent = new EventEmitter();
+		this.updateTaskEvent = new EventEmitter();
+	}
 
 	ngOnInit() {}
 
-	markTask(task: Task){
+	markTask(task: Task): any{
 		if(task.completed){
-			return	task.completed = false;
+			task.completed = false;
+			return this.updateTaskEvent.emit(task);
 		}
 		if(!task.completed){
-			return task.completed = true;
+			task.completed = true;
+			return this.updateTaskEvent.emit(task);
 		}
-		console.log('mark complete : ', task);
+		
 	}
 
 	deleteTask(task: Task){
-		console.log('delete : ', task);
+		return this.deleteTaskEvent.emit(task);
 	}
 
 }

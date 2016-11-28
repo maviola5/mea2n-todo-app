@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { 
 	FormBuilder, 
 	FormGroup, 
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
 	constructor(
 		private authService: AuthService,
-		private formBuilder: FormBuilder
+		private formBuilder: FormBuilder,
+		private router: Router
 	) {
 		this.form = formBuilder.group({
 			'name' : ['', Validators.required],
@@ -72,7 +74,22 @@ export class RegisterComponent implements OnInit {
 			});
 		}
 
-		this.authService.register(params).subscribe( (results: any) => console.log(results));
+		this.authService
+		.register(params)
+		.subscribe( 
+			(results: any) => {
+				this.authService.setToken(results.token);
+			},
+			(err) => {
+				return this.message = new Message({
+					text : err,
+					active : true
+				});
+			},
+			() => {
+				this.router.navigate(['/todo']);
+			}
+		);
 	}
 
 	ngOnInit() {

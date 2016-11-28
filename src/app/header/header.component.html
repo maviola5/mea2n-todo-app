@@ -12,11 +12,11 @@
 		<li class="nav__li">
 			<a [routerLink]="['/register']" routerLinkActive="is-active" class="nav__a" *ngIf="!showLogin()">Register</a>
 		</li>
-	<!-- 	<li class="nav__li">
-			<a [routerLink]="['/todo']" routerLinkActive="is-active" class="nav__a" *ngIf="showLogin()">Todo</a>
-		</li> -->
 		<li class="nav__li">
 			<a class="nav__a" *ngIf="showLogin()" (click)="logout()">Logout</a>
 		</li>
 	</ul>
 </nav>
+<div class="card status success" *ngIf="user()">
+	<div class="user_status">User: {{ user() }}</div>
+</div>

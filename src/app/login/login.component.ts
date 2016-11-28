@@ -57,22 +57,18 @@ export class LoginComponent implements OnInit {
 		this.authService
 		.login(params.username, params.password)
 		.subscribe(
-			(): any => {
-				if( this.authService.isLoggedIn() ){
-					let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/todo';
-
-					return this.router.navigate([redirect]);
-				}
-
-				this.message = new Message({
-					text : 'Username and password combination incorrect.',
+			(results: any) => {
+				this.authService.setToken(results.token);
+			},
+			(err: any) => {
+				return this.message = new Message({
+					text : JSON.parse(err._body).message,
 					active : true
 				});
 			},
-			(err) => {
-				//catch error for when running auth against server
-			},
-			() => {}
+			() => {
+				this.router.navigate(['/todo']);
+			}
 		);
 	}
 
